@@ -1,0 +1,11 @@
+aiogram==3.4.1
+python-dotenv
+youtube-transcript-api
+yt-dlp
+aiohttp
+requests
+python-docx
+fpdf2
+arabic-reshaper
+python-bidi
+cachetools
