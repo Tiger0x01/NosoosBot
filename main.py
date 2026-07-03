@@ -5,7 +5,7 @@ from aiogram import Bot, Dispatcher, types, F
 from aiogram.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, FSInputFile
 from cachetools import TTLCache
-
+from aiohttp import web
 from config import TELEGRAM_TOKEN, logger
 from media_handler import fetch_video_data, get_transcript_text
 from text_cleaner import clean_text
@@ -203,6 +203,16 @@ async def main():
     logger.info("البوت يعمل الآن")
     dp.shutdown.register(on_shutdown) # تسجيل عملية الإغلاق الآمن للـ Sessions
     await dp.start_polling(bot)
+
+
+
+async def start_web_server():
+    app = web.Application()
+    app.router.add_get('/', lambda request: web.Response(text="NosoosBot is alive!"))
+    runner = web.AppRunner(app)
+    await runner.setup()
+    site = web.TCPSite(runner, '0.0.0.0', int(os.environ.get("PORT", 8080)))
+    await site.start()
 
 if __name__ == "__main__":
     asyncio.run(main())
