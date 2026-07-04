@@ -201,6 +201,7 @@ async def on_shutdown(dispatcher):
 
 async def main():
     logger.info("البوت يعمل الآن")
+    await start_web_server()
     dp.shutdown.register(on_shutdown) # تسجيل عملية الإغلاق الآمن للـ Sessions
     await dp.start_polling(bot)
 
